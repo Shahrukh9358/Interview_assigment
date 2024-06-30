@@ -22,7 +22,8 @@ class _AskUserDetailsState extends State<AskUserDetails> {
   UserController _userController = Get.find<UserController>();
 
   saveUser() async {
-    await auth.currentUser!.linkWithCredential(EmailAuthProvider.credential(email: _emailController.text, password: _passwordController.text));
+    await auth.currentUser!.linkWithCredential(EmailAuthProvider.credential(
+        email: _emailController.text, password: _passwordController.text));
 
     await db.collection(AppConstants.userCollection).add({
       "full_name": _nameController.text,
@@ -58,7 +59,8 @@ class _AskUserDetailsState extends State<AskUserDetails> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Create and account Email and password!"),
+                Text("Create and account with Email and password!",style: TextStyle(fontSize: 25,color: Colors.white),),
+                SizedBox(height: 20,),
                 TextFormField(
                   controller: _nameController,
                   decoration: InputDecoration(
@@ -77,6 +79,7 @@ class _AskUserDetailsState extends State<AskUserDetails> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20,),
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -95,6 +98,7 @@ class _AskUserDetailsState extends State<AskUserDetails> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20,),
                 TextFormField(
                   controller: _passwordController,
                   decoration: InputDecoration(

@@ -13,7 +13,15 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   Widget build(BuildContext context) {
     return Center(
       child: TextButton(
-        child: Text("Start Video Call"),
+        child: Text(
+          "Start Video Call",
+          style: TextStyle(color: Colors
+              .white), // Text color to contrast with black background
+        ),
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.black, // Background color
+          fixedSize: Size(150, 50), // Width and height
+        ),
         onPressed: () {
           Get.toNamed("/agora_ui_kit_screen");
         },

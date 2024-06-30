@@ -33,7 +33,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         Get.showSnackbar(
           GetSnackBar(
             backgroundColor: Colors.red,
-            title: e.message.toString(),
+            message: e.message.toString(),
           )
         );
       },

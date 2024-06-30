@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:assignment_project/controllers/auth_controller.dart';
 import 'package:assignment_project/controllers/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:get/get.dart';
-
 import '../../constants.dart';
 
 class VerifyOtpScreen extends StatefulWidget {
@@ -75,71 +73,98 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     );
 
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Pinput(
-                controller: pinController,
-                focusNode: focusNode,
-                length: 6,
-                defaultPinTheme: defaultPinTheme,
-                separatorBuilder: (index) => const SizedBox(width: 8),
-                hapticFeedbackType: HapticFeedbackType.lightImpact,
-                onCompleted: (pin) {
-                  debugPrint('onCompleted: $pin');
-                },
-                onChanged: (value) {
-                  debugPrint('onChanged: $value');
-                },
-                cursor: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 9),
-                      width: 22,
-                      height: 1,
-                      color: focusedBorderColor,
-                    ),
-                  ],
-                ),
-                focusedPinTheme: defaultPinTheme.copyWith(
-                  decoration: defaultPinTheme.decoration!.copyWith(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: focusedBorderColor),
-                  ),
-                ),
-                submittedPinTheme: defaultPinTheme.copyWith(
-                  decoration: defaultPinTheme.decoration!.copyWith(
-                    color: fillColor,
-                    borderRadius: BorderRadius.circular(19),
-                    border: Border.all(color: focusedBorderColor),
-                  ),
-                ),
-                errorPinTheme: defaultPinTheme.copyBorderWith(
-                  border: Border.all(color: Colors.redAccent),
-                ),
-              ),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFFCB2B93),
+              Color(0xFF9546C4),
+              Color(0xFF5E61F4),
             ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          Row(
-            children: [
-              Expanded(
-                child:  TextButton(
-                  onPressed: () {
-                    focusNode.unfocus();
+        ),
 
-                    verifyCode();
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Pinput(
+                  controller: pinController,
+                  focusNode: focusNode,
+                  length: 6,
+                  defaultPinTheme: defaultPinTheme,
+                  separatorBuilder: (index) => const SizedBox(width: 8),
+                  hapticFeedbackType: HapticFeedbackType.lightImpact,
+                  onCompleted: (pin) {
+                    debugPrint('onCompleted: $pin');
                   },
-                  child: const Text('Validate'),
+                  onChanged: (value) {
+                    debugPrint('onChanged: $value');
+                  },
+                  cursor: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 9),
+                        width: 22,
+                        height: 1,
+                        color: focusedBorderColor,
+                      ),
+                    ],
+                  ),
+                  focusedPinTheme: defaultPinTheme.copyWith(
+                    decoration: defaultPinTheme.decoration!.copyWith(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: focusedBorderColor),
+                    ),
+                  ),
+                  submittedPinTheme: defaultPinTheme.copyWith(
+                    decoration: defaultPinTheme.decoration!.copyWith(
+                      color: fillColor,
+                      borderRadius: BorderRadius.circular(19),
+                      border: Border.all(color: focusedBorderColor),
+                    ),
+                  ),
+                  errorPinTheme: defaultPinTheme.copyBorderWith(
+                    border: Border.all(color: Colors.white),
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
-      ),
+              ],
+            ),
+            SizedBox(height: 40,),
+            Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: TextButton(
+                      onPressed: () {
+                        focusNode.unfocus();
+                        verifyCode();
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.white,
+                      ),
+                      child: const Text(
+                        'Verify OTP',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+
+          ],
+        ),
+      )
     );
   }
 }
